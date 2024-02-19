@@ -1,5 +1,5 @@
 function NotFound() {
-    return (<h1> 404 Not Found </h1>  );
+  return <img src="/images/notfound.jfif" width="100%" />;
 }
 
 export default NotFound;

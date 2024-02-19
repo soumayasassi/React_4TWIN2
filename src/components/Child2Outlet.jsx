@@ -9,7 +9,6 @@ function Child2Outlet() {
       <h2>Child 2 Component</h2>
       <p>This is Child 2 content.</p>
       <p>state send by my father {location.state.message}</p>
-     
     </div>
   );
 }

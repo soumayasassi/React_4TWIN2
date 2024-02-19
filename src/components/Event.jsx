@@ -3,6 +3,7 @@ import viteLogo from "/vite.svg";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 function Event(props) {
   const [event, setEvent] = useState(props.event);
   const handleBuy = () => {
@@ -28,7 +29,7 @@ function Event(props) {
         />
 
         <Card.Body>
-          <Card.Title>{event.name}</Card.Title>
+          <Card.Title><Link to={`/events/${event.id}`}>{event.name}</Link></Card.Title>
           <Card.Text>Price : {event.price}</Card.Text>
           <Card.Text>Number of tickets : {event.nbTickets}</Card.Text>
           <Card.Text>Number of participants : {event.nbParticipants}</Card.Text>
