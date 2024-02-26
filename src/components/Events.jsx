@@ -1,9 +1,11 @@
-import events from "../events.json";
+ 
 import { Container, Row, Alert } from "react-bootstrap";
 import Event from "./Event";
 import { useEffect, useState } from "react";
+import { getallEvents } from "../service/api";
 
 function Events() {
+  const [events, setEvents] = useState([]);
   const [showalert, setShowalert] = useState(false);
   const [welcome, setWelcome] = useState(true);
   const showAlert = () => {
@@ -18,6 +20,17 @@ function Events() {
       setWelcome(false)
     }, 3000);
   }, []);
+
+  useEffect(() => {
+   fetchdata() ; 
+  }, []);
+
+  const fetchdata = async () => 
+  {
+    const response = await getallEvents() 
+    setEvents(response.data ) ; 
+  }
+
   return (
     <>
     { welcome && (<Alert> Hey Welcome to Esprit Events</Alert>)}

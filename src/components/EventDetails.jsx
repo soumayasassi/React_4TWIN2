@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import events from "../events.json";
+import { getallEvents } from "../service/api";
+ 
 
 export default function EventDetails() {
   const   {id }  = useParams();
-  const event = events.find((evt) => evt.id == id);
-console.log(event)
+  /*const param = useParams() ; 
+  param.id*/
+  //const event = events.find((evt) => evt.id == id);
+ const [event, setEvent]  = useState({})
+
+  useEffect(() => {
+    fetchone() ; 
+   }, []);
+ 
+   const fetchone = async () => 
+   {
+     const response = await getallEvents(id) 
+    setEvent(response.data ) ; 
+     console.log(event)
+   }
   return (
     <Container style={{ marginTop: "30px" }}>
       <Row>
