@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getallEvents } from "../service/api";
  
@@ -19,9 +19,13 @@ export default function EventDetails() {
    {
      const response = await getallEvents(id) 
     setEvent(response.data ) ; 
+    
      console.log(event)
    }
   return (
+    <>
+   
+    {event.id === undefined ? <Alert> Event does not exist </Alert>  : 
     <Container style={{ marginTop: "30px" }}>
       <Row>
         <Col md={4}>
@@ -56,6 +60,7 @@ export default function EventDetails() {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </Container>  }
+    </>
   );
 }

@@ -2,8 +2,9 @@ import { Button } from "react-bootstrap";
 import viteLogo from "/vite.svg";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { editEvent } from "../service/api";
 function Event(props) {
   const [event, setEvent] = useState(props.event);
   const handleBuy = () => {
@@ -20,6 +21,19 @@ function Event(props) {
       like: !prev.like,
     }));
   };
+
+  useEffect(() => {
+    updateEvent();
+  }, [event.like]);
+
+  useEffect(() => {
+    updateEvent();
+  }, [event.nbTickets]);
+
+  const updateEvent = async () => {
+    await editEvent(event.id, event);
+  };
+
   return (
     <Col style={{ width: "20%", margin: "10px" }} className="m-2">
       <Card>
@@ -29,12 +43,13 @@ function Event(props) {
         />
 
         <Card.Body>
-          <Card.Title><Link to={`/events/${event.id}`}>{event.name}</Link></Card.Title>
+          <Card.Title>
+            <Link to={`/events/${event.id}`}>{event.name}</Link>
+          </Card.Title>
           <Card.Text>Price : {event.price}</Card.Text>
           <Card.Text>Number of tickets : {event.nbTickets}</Card.Text>
           <Card.Text>Number of participants : {event.nbParticipants}</Card.Text>
           <Button onClick={handleLike}>
-            {" "}
             {event.like ? "Dislike" : "Like"}
           </Button>
           <Button
@@ -42,8 +57,18 @@ function Event(props) {
             onClick={handleBuy}
             disabled={event.nbTickets ? false : true}
           >
-            {" "}
             Book Event
+          </Button>
+          <Button variant="success">
+            <Link
+              to={`/events/update/${event.id}`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Update
+            </Link>
+          </Button>
+          <Button variant="danger" onClick={() => props.deleteEvent(event.id)}>
+            Delete
           </Button>
         </Card.Body>
       </Card>

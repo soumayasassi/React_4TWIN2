@@ -18,6 +18,7 @@ function NavigationBar() {
           >
             Events
           </Nav.Link>
+           
           <Nav.Link
             as={NavLink}
             to="/events/add"
@@ -26,7 +27,7 @@ function NavigationBar() {
             })}
           >
             Add New Event
-          </Nav.Link>
+          </Nav.Link> 
         </Nav>
       </Container>
     </Navbar>
